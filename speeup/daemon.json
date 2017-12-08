@@ -1,0 +1,13 @@
+{
+    "graph": "/home/latelee/docker_reg",
+    "storage-driver": "overlay",
+    "registry-mirrors": [
+        "https://ffuu6oll.mirror.aliyuncs.com",
+        "https://u1qbyfsc.mirror.aliyuncs.com",
+        "http://hub-mirror.c.163.com"
+        ],
+    "insecure-registries": [
+        "172.18.18.18:5000",
+        "172.18.18.18:5001"
+        ]
+}
