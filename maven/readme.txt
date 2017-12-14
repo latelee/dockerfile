@@ -1,5 +1,5 @@
 from:
-https://github.com/carlossg/docker-maven/tree/master/jdk-7
+https://github.com/carlossg/docker-maven/tree/master/jdk-8
 
 maven 3.5.2
-jdk:7
+jdk:8
