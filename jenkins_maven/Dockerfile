@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 
 MAINTAINER Late Lee(li@latelee.org)
 
-RUN apt-get update && apt-get install -y git curl && apt-get install maven && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git curl && apt-get -y install maven && rm -rf /var/lib/apt/lists/*
 
 ARG user=jenkins
 ARG group=jenkins
