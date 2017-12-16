@@ -1,3 +1,2 @@
-https://github.com/jenkinsci/docker
-
-update jenkins version to 2.73.2
+from unbuntu 16.04
+and install some tools for other usages.
