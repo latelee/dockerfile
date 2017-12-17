@@ -3,7 +3,7 @@ FROM openjdk:8-jdk
 MAINTAINER Late Lee(li@latelee.org)
 
 RUN apt-get update && \
-    apt-get install -y git curl maven docker.io\
+    apt-get install -y git curl maven docker.io && \
    rm -rf /var/lib/apt/lists/*
 
 #RUN apt-get update && \
