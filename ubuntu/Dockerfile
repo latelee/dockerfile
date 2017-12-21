@@ -14,9 +14,15 @@ RUN apt-get update && \
     vim tree \
     cppcheck \
     dos2unix \
-    apt-transport-https \
-    curl \
+    apt-transport-https ca-certificates software-properties-common \
+    curl wget \
+    net-tools inetutils-ping \
     pkg-config && \
     rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --install /usr/bin/python python \
+    /usr/bin/python2 100 && \
+    update-alternatives --install /usr/bin/python python \
+    /usr/bin/python3 150
 
 CMD ["/bin/bash"]
