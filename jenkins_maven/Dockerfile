@@ -22,9 +22,9 @@ RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key a
      add-apt-repository \
      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
      $(lsb_release -cs) \
-     stable" && \
-     apt-get update && \
-     apt-get install -y docker-ce jenkins=2.73.2 maven && \
+     stable" ; \
+     apt-get update ; \
+     apt-get install -y docker-ce jenkins=2.73.2 maven openjdk-8-jdk; \
      rm -rf /var/lib/apt/lists/*
 
 ARG user=jenkins
@@ -34,7 +34,7 @@ ARG gid=1000
 ARG http_port=8080
 ARG agent_port=50000
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV MAVEN_HOME /usr/share/maven
 
 ENV JENKINS_HOME /var/jenkins_home
