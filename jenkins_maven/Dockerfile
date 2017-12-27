@@ -9,6 +9,7 @@ RUN apt-get update && \
     flex bison \
     cmake autoconf \
     git subversion \
+    vi \
     unzip \
     python-pip \
     apt-transport-https ca-certificates software-properties-common \
