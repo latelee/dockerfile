@@ -5,11 +5,12 @@ LABEL maintainer Late Lee(li@latelee.org)
 RUN apt-get update && \
     apt-get install -y \
     build-essential \
+    cppcheck \
     libssl-dev \
     flex bison \
     cmake autoconf \
     git subversion \
-    vi \
+    vim \
     unzip \
     python-pip \
     apt-transport-https ca-certificates software-properties-common \
@@ -45,8 +46,8 @@ ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
 #    && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 # by Late Lee
-RUN usermod -u ${uid} ${user}
-RUN usermod -u ${gid} ${group}
+#RUN usermod -u ${uid} ${user}
+#RUN usermod -u ${gid} ${group}
 
 # Jenkins home directory is a volume, so configuration and build history 
 # can be persisted and survive image upgrades
@@ -82,6 +83,7 @@ EXPOSE ${agent_port}
 ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
 #USER ${user}
+# We need root to do something we need
 USER root
 
 COPY jenkins-support /usr/local/bin/jenkins-support
