@@ -13,6 +13,7 @@ RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
     apt-get update || true && \
     apt-get install -y bazel swig && \
     pip3 --no-cache-dir install numpy wheel && \
+    ln -s /usr/lib/x86_64-linux-gnu/libcudnn.so.6.0.21 /usr/lib/x86_64-linux-gnu/libcudnn.so.6.0 && \
     rm -rf /var/lib/dpkg/info/* /var/lib/apt/lists/* \
     /var/log/*.log /root/.cache
 
