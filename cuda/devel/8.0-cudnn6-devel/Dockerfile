@@ -4,7 +4,7 @@ COPY n163.list /tmp
 RUN cat /tmp/n163.list > /etc/apt/sources.list && \
     apt-get update || true && \
     apt-get install -y \
-    wget curl  python3-pip python3-dev python3 openjdk-8-jdk &&\
+    vi wget curl  python3-pip python3-dev python3 openjdk-8-jdk &&\
     ln -s /usr/bin/python3 /usr/bin/python &&\
     ln -s /usr/bin/pip3 /usr/bin/pip && \
     pip install --upgrade pip
@@ -12,7 +12,9 @@ RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
     curl https://bazel.build/bazel-release.pub.gpg | apt-key add - && \
     apt-get update || true && \
     apt-get install -y bazel swig && \
-    pip3 --no-cache-dir install numpy wheel 
+    pip3 --no-cache-dir install numpy wheel && \
+    rm -rf /var/lib/dpkg/info/* /var/lib/apt/lists/* \
+    /var/log/*.log /root/.cache
 
 CMD ["bash"]
 
