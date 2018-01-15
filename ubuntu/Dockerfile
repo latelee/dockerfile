@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Late Lee(li@latelee.org)
+LABEL maintainer Late Lee(li@latelee.org)
 
 RUN apt-get update && \
     apt-get install -y \
@@ -10,7 +10,7 @@ RUN apt-get update && \
     cmake autoconf \
     git subversion \
     unzip \
-    python-pip \
+    python3-pip python3-dev python3 \
     vim tree \
     cppcheck \
     dos2unix \
@@ -18,11 +18,9 @@ RUN apt-get update && \
     curl wget \
     net-tools inetutils-ping \
     pkg-config && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/dpkg/info/* /var/lib/apt/lists/*
 
-RUN update-alternatives --install /usr/bin/python python \
-    /usr/bin/python2 100 && \
-    update-alternatives --install /usr/bin/python python \
-    /usr/bin/python3 150
+RUN ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
 
 CMD ["/bin/bash"]
