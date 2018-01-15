@@ -8,7 +8,7 @@ RUN apt-get update && \
     libssl-dev \
     gdb flex bison \
     cmake autoconf \
-    git subversion \
+    git \
     unzip \
     python3-pip python3-dev python3 \
     vim tree \
@@ -20,7 +20,8 @@ RUN apt-get update && \
     pkg-config && \
     rm -rf /var/lib/dpkg/info/* /var/lib/apt/lists/*
 
-RUN ln -s /usr/bin/python3 /usr/bin/python && \
-    ln -s /usr/bin/pip3 /usr/bin/pip
+RUN ln -s /usr/bin/python3 /usr/bin/python || true && \
+    ln -s /usr/bin/pip3 /usr/bin/pip || true && \
+    pip install --upgrade pip
 
 CMD ["/bin/bash"]
