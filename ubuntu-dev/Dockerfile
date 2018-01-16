@@ -22,7 +22,7 @@ RUN mkdir -p /tmp/test && cd /tmp/test && \
     wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2 && echo "$BOOST_SHA boost_1_66_0.tar.bz2" | sha256sum -c - && \
     tar jxf boost_1_66_0.tar.bz2 && cd boost_1_66_0 && \
     sh bootstrap.sh --with-libraries=all -with-toolset=gcc && \
-    ./b2 && ./b2 install && \
+    ./b2 || true && ./b2 install || true && \
     cd /tmp/test
 
 RUN wget http://fftw.org/fftw-3.3.7.tar.gz && \
