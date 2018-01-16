@@ -20,7 +20,7 @@ ENV BOOST_SHA 5721818253e6a0989583192f96782c4a98eb6204965316df9f5ad75819225ca9
 
 RUN mkdir -p /tmp/test && cd /tmp/test && \
     wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2 && echo "$BOOST_SHA boost_1_66_0.tar.bz2" | sha256sum -c - && \
-    tar jxf boost_1_66_0.tar.bz2 && cd boost_1_66_0 \
+    tar jxf boost_1_66_0.tar.bz2 && cd boost_1_66_0 && \
     sh bootstrap.sh --with-libraries=all -with-toolset=gcc && \
     ./b2 && ./b2 install && \
     cd /tmp/test
