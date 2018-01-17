@@ -32,7 +32,7 @@ RUN wget http://releases.llvm.org/5.0.1/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu
 	mv clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04 /usr/local/bin/clang && \
 	rm -rf clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz
 
-ENV PATH $PATH:/usr/local/clang/bin
+ENV PATH $PATH:/usr/local/bin/clang/bin
 
 RUN ln -s /usr/bin/python3 /usr/bin/python || true && \
     ln -s /usr/bin/pip3 /usr/bin/pip || true && \
