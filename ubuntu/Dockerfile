@@ -2,10 +2,13 @@ FROM ubuntu:16.04
 
 LABEL maintainer Late Lee(li@latelee.org)
 
-RUN apt-get update && \
+#COPY n163.list /tmp
+#RUN cat /tmp/n163.list > /etc/apt/sources.list && rm -rf /tmp/n163.list
+
+RUN apt-get update || true && \
     apt-get install -y \
     build-essential \
-    libssl-dev \
+    libssl-dev libc6-dev \
     gdb flex bison \
     cmake autoconf \
     git \
@@ -25,6 +28,7 @@ ENV GO_VERSION 1.9.2
 RUN curl -fSL "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" | tar xzC /usr/local
 ENV GOPATH /go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 # clang
 RUN wget http://releases.llvm.org/5.0.1/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz && \
