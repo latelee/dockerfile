@@ -23,13 +23,6 @@ RUN apt-get update || true && \
     pkg-config && \
     rm -rf /var/lib/dpkg/info/* /var/lib/apt/lists/*
 
-# GO 1.9
-ENV GO_VERSION 1.9.2
-RUN curl -fSL "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" | tar xzC /usr/local
-ENV GOPATH /go
-ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
-RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-
 # clang
 RUN wget http://releases.llvm.org/5.0.1/clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz && \
 	tar xf clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-16.04.tar.xz && \
