@@ -12,16 +12,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
     echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 
 ENV CUDA_VERSION 9.0.176
-ENV NCCL_VERSION 2.2.13
+ENV CUDNN_VERSION 7.2.1.38
+LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
 ENV CUDA_PKG_VERSION 9-0=$CUDA_VERSION-1
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    	    cuda-libraries-$CUDA_PKG_VERSION \
-	    cuda-cublas-9-0=9.0.176.4-1 \
-    	    cuda-cudart-$CUDA_PKG_VERSION && \
-	    ln -s cuda-9.0 /usr/local/cuda && \
-	    libnccl2=$NCCL_VERSION-1+cuda9.0 && \
-	    apt-mark hold libnccl2 && \
-    	    rm -rf /var/lib/apt/lists/*
+        cuda-cudart-$CUDA_PKG_VERSION \
+	libcudnn7=$CUDNN_VERSION-1+cuda9.0 && \
+	apt-mark hold libcudnn7 && \
+    	ln -s cuda-9.0 /usr/local/cuda && \
+    	rm -rf /var/lib/apt/lists/*
 
 # nvidia-docker 1.0
 LABEL com.nvidia.volumes.needed="nvidia_driver"
