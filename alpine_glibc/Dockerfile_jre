@@ -1,0 +1,42 @@
+FROM alpine:3.16
+
+#ENV JAVA_HOME=/hyc_docker/jdk/jdk1.8.0_221
+#ENV CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+#ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Java Version and other ENV
+ENV JAVA_HOME=/opt/jdk \
+    PATH=${PATH}:/opt/jdk/bin \
+    GLIBC_VERSION=2.23-r1 \
+    LANG=C.UTF-8
+
+RUN cd /tmp/ && \
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk && \
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk && \
+    apk add --no-cache glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk && \
+    apk add --no-cache --update libstdc++ openjdk8-jre && \
+    rm -rf /var/cache/apk/* *.apk
+
+#wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.33-r0/glibc-i18n-2.33-r0.apk && \
+
+#WORKDIR /var/lib/apk
+
+#COPY lib/ /tmp/
+#RUN cd /tmp/ && \
+#    mv ./sgerrand.rsa.pub /etc/apk/keys/sgerrand.rsa.pub && \
+#    sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+#    apk add --no-cache glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk && \
+#    apk add --no-cache --update libstdc++ openjdk8-jre && \
+#    rm -rf /var/cache/apk/* glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk
+
+
+#add other apk
+#RUN apk add --no-cache --update nodejs
+
+# test...
+#WORKDIR /app
+#COPY bin/ ./
+#RUN chmod +x *.bin
+#RUN /usr/glibc-compat/sbin/ldconfig /app/thirdparty 

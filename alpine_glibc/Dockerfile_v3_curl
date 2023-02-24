@@ -1,0 +1,10 @@
+# 安装glibc、bash、时区tzdata curl
+# 默认为东八区
+FROM latelee/alpine:glibc
+ 
+
+RUN cd /tmp/ && \
+	apk add --no-cache -U tzdata bash curl && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone && \
+    rm -rf /var/cache/apk/* *.apk
